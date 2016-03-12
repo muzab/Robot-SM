@@ -1,0 +1,75 @@
+Requirements/Suggestions
+------------------------
+
+- Squeezed or stuck (How to avoid it and getout of it)
+- Work on direction (i.e. vehicle should be able to detect the right direction if hit and turned)
+- Gyro/Accelerometer will guide the vechile towards right direction. Right now it cannot detect the
+  correct direction to move.
+- winning speed today is 2 m/sec but vehicle is not operating with this speed.
+- use clocks for path-planning
+- throttle class has the value set for max-speed.
+- There is nothing measuring the exact speed at the moment. The speed varies very rapidly if you want   - to try with BLE.
+- Steering +-127 degrees is the data you will send (forward, reverse, sideway)
+- Calculate, how much lag there is in the manoeuvre 40cm is the curve radius i.e. the maximum the car     can turn.
+
+Hardware Modules:
+-----------------
+MK20DX256(ARM-CORTEX M4 Processor)
+MPU6050-I2C bus in the teensy project (you can download it and check what I2C bus you will want to run ...mostly it is the first bus. The other I2C bus is accessed under the circuit.
+
+Blue tooth module:
+RC5 code for IR Remote-Controller
+50 data/sec
+
+660 Bytes
+Computation of row data
+for optimization cut down the times.
+
+
+Object Recognition
+------------------
+60cm- object recognition range is quite normal.
+4-50cm according to Manufacture spec but 4-64 cm object recognition is normally possible. But  recognition is possible upto 128cms.
+
+first 7 sensors are handled by Chipset1
+last 7 sensors are handled by Chipset2
+
+Car-Codes
+----------
+Snow white: 9999
+            8888 etc
+
+Error Level
+-----------
+127 means nothing or no-data. 127 error level or infinity (distance or no measurement). 
+100-500 cm
+@9cm starts the data capture
+295cm in the function getae() or getai()? // exposure value. 295 means that you are looking at something white, the darker it gets the lower the value it becomes.
+
+IR Sensors:
+-----------
++-3 degrees gaussian (IR Beam)
+You will not be able to detect below 30cm
+
+
+
+
+
+
+
+Atmel-Arduino Setup
+-------------------
+
+1) Download Atmel Studio
+   Link: http://www.atmel.com/products/microcontrollers/avr/default.aspx
+2) Add Visual Micro plugin in the Atmel Studio.
+3) Install Teensyduino
+   Link: https://www.pjrc.com/teensy/td_download.html
+4) You should be able to compile/flash the code that you have made to the vehicle
+
+Note: If your visual Micro plugin is not working after installation, it means it has picked-up the older-version of your OS-Visual studio for installation and would need to be directed to your VS-2015 folder. 
+
+- Download Visual.Micro.Atmel.Studio.vslx 
+link: https://visualstudiogallery.msdn.microsoft.com/0cb4039b-4173-40cb-86ff-96522bee0232
+
+- Atmel Studio 7  Atmel users please note. If you are unable to install Visual Micro because of an errorthis means you need to set your VSIXInstaller to run with VS2015 which is what AS7 is based on). Right click the Visual Micro installer .VSIX file and change the VSIXInstaller to use Visual Studio 2015 (v14) which is normally located in "c:\program files (x86)\Microsoft Visual Studio 14.0\Common7\IDE". The Atmel Studio 6.2 version is still available in the Atmel Gallery or in Atmel Studio via "Tools>Extensions and Updates". 6.2 is an older release and not recommended. Atmel studio is currently limited to Arduino Ide versions 1.6.5-r5 and below
